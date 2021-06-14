@@ -1,0 +1,62 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Todo List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let item of todo; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTodo(item, i)"
+      >
+        {{ item.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTodo()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTodo">
+      <h4>Todo</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentTodo.title }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTodo.status ? "Completed" : "Pending" }}
+      </div>
+      <div>
+        <label><strong>Due Date:</strong></label>
+        {{ currentTodo.due_date }}
+      </div>
+      <a class="m-3 btn btn-sm btn-success" routerLink="/todo/{{ currentTodo.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentTodo">
+      <br />
+      <p>Please click on a Todo...</p>
+    </div>
+  </div>
+</div>

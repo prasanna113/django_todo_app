@@ -1,0 +1,37 @@
+<div style="width: 400px; margin: auto;">
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="todo.title"
+          name="title"
+        />
+      </div>
+
+      <br>
+      <div class="form-group">
+        <label for="title">Due Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="due_date"
+          [(ngModel)]="todo.due_date"
+          name="due_date"
+          min="{{ this.date }}"
+        >
+      </div>
+      <br>
+      <button (click)="saveTodo()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Todo created successfully!</h4>
+      <button class="btn btn-success" (click)="newTodo()">Add</button>
+    </div>
+  </div>
+</div>

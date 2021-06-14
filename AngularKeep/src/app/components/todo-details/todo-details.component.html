@@ -1,0 +1,66 @@
+<div style="width: 400px; margin: auto;">
+  <div *ngIf="currentTodo" class="edit-form">
+    <h4>Todo</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentTodo.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentTodo.status ? "Completed" : "Pending" }}
+      </div>
+      <div class="form-group">
+        <label for="title">Due Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="due_date"
+          name="due_date"
+          value= "{{ currentTodo.due_date }}"
+          [(ngModel)]="currentTodo.due_date"
+        >
+      </div>
+      <br>
+    </form>
+
+    <button
+      class="btn btn-success"
+      *ngIf="currentTodo.status"
+      (click)="updateStatus(false)"
+    >
+      Reset
+    </button>
+    <button
+      *ngIf="!currentTodo.status"
+      class="btn btn-success"
+      (click)="updateStatus(true)"
+    >
+      Done
+    </button>
+
+    <button class="btn btn-danger" (click)="deleteTodo()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      (click)="updateTodo()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentTodo">
+    <br />
+    <p>Cannot access this todo...</p>
+  </div>
+</div>
